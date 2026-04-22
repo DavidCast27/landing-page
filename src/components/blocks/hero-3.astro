@@ -48,12 +48,21 @@ const { class: className, id, links, image } = Astro.props
       }
     </SectionActions>
   </SectionContent>
-  <SectionMedia class="absolute inset-0 rounded-none bg-white dark:bg-black">
-    <Image
-      class="opacity-50"
-      sizes="(min-width: 1536px) 1536px, 100vw"
-      priority
-      {...image}
-    />
+  <SectionMedia class="absolute inset-0 rounded-none overflow-hidden bg-slate-50 dark:bg-slate-950">
+    <!-- Premium glowing orbs effect (adapts to light/dark) -->
+    <div class="absolute -top-[300px] -right-[300px] h-[800px] w-[800px] rounded-full bg-amber-400/20 dark:bg-amber-600/15 blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-[300px] -left-[100px] h-[600px] w-[600px] rounded-full bg-indigo-400/20 dark:bg-indigo-600/15 blur-3xl pointer-events-none"></div>
+    <!-- Gradient overlay to blend into the rest of the page -->
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-slate-50/90 dark:to-slate-950/90"></div>
+    
+    <!-- Optional: Keep the image but blend it softly if it exists -->
+    {image?.src && (
+      <Image
+        class="absolute inset-0 h-full w-full object-cover opacity-10 mix-blend-overlay dark:opacity-10 dark:mix-blend-overlay"
+        sizes="(min-width: 1536px) 1536px, 100vw"
+        priority
+        {...image}
+      />
+    )}
   </SectionMedia>
 </Section>

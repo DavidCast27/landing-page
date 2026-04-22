@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, initial-scale=1.0">
+    <title>Social Preview - Landing Page Template</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #020617;
+            --accent-copper: #d97706; /* Warmer amber/copper */
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-base);
+            width: 1200px;
+            height: 630px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Premium background grid / glow */
+        .bg-glow {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.15) 0%, transparent 60%);
+            top: -200px;
+            right: -200px;
+            pointer-events: none;
+        }
+        
+        .bg-glow-2 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, transparent 60%);
+            bottom: -200px;
+            left: -100px;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Central Browser Mockup */
+        .browser-window {
+            width: 850px;
+            height: 500px;
+            background: #0f172a;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255,255,255,0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 10;
+        }
+
+        .browser-bar {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .window-controls { display: flex; gap: 8px; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .red { background: #ef4444; }
+        .yellow { background: #eab308; }
+        .green { background: #22c55e; }
+
+        .address-bar {
+            flex-grow: 1;
+            margin: 0 20px;
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: #94a3b8;
+            font-size: 11px;
+            padding: 6px 0;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        /* Inner Landing Page Mockup */
+        .landing-content {
+            flex: 1;
+            background: linear-gradient(180deg, #020617 0%, #0f172a 100%);
+            position: relative;
+            padding: 60px 40px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: 
+                radial-gradient(ellipse at top, rgba(217, 119, 6, 0.2), transparent 50%),
+                linear-gradient(135deg, rgba(2,6,23,0.9) 0%, rgba(15,23,42,0.95) 100%);
+        }
+
+        .brand-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 999px;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: 46px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: #fff;
+            letter-spacing: -1px;
+        }
+
+        .hero-title span {
+            background: linear-gradient(to right, #fcd34d, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 15px;
+            color: #94a3b8;
+            max-width: 650px;
+            line-height: 1.5;
+            margin-bottom: 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .btn-primary { background: #fff; color: #020617; }
+        .btn-secondary { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); }
+
+
+        /* Floating Feature Badges */
+        .feature-badge {
+            position: absolute;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 14px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6);
+            z-index: 20;
+            color: #fff;
+            transition: transform 0.3s ease;
+        }
+        
+        .fb-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .fb-content { display: flex; flex-direction: column; }
+        .fb-title { font-size: 14px; font-weight: 800; }
+        .fb-sub { font-size: 10px; color: #94a3b8; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
+
+        /* Positioning the badges */
+        .badge-1 { top: 60px; right: 80px; transform: rotate(4deg); }
+        .badge-2 { bottom: 80px; left: 80px; transform: rotate(-3deg); }
+        .badge-3 { bottom: 120px; right: 50px; transform: rotate(-5deg); }
+        .badge-4 { top: 70px; left: 100px; transform: rotate(-4deg); }
+
+        /* Specific Badge Styles */
+        .badge-1 .fb-icon { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+        .badge-2 .fb-icon { background: rgba(234, 88, 12, 0.2); color: #fb923c; font-weight:900; font-family: monospace;}
+        .badge-3 .fb-icon { background: rgba(168, 85, 247, 0.2); color: #c084fc; font-weight: bold;}
+        .badge-4 .fb-icon { background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-weight: bold;}
+
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <div class="bg-glow-2"></div>
+
+    <div class="container">
+        
+        <!-- Feature Badges -->
+        <div class="feature-badge badge-1">
+            <div class="fb-icon">✓</div>
+            <div class="fb-content">
+                <span class="fb-title">100 / 100</span>
+                <span class="fb-sub">Lighthouse Score</span>
+            </div>
+        </div>
+
+        <div class="feature-badge badge-4">
+            <div class="fb-icon">⚡️</div>
+            <div class="fb-content">
+                <span class="fb-title">Decap CMS</span>
+                <span class="fb-sub">Mantenimiento Cero USD</span>
+            </div>
+        </div>
+
+        <div class="feature-badge badge-2">
+            <div class="fb-icon">&lt;/&gt;</div>
+            <div class="fb-content">
+                <span class="fb-title">Astro + Tailwind</span>
+                <span class="fb-sub">Arquitectura Moderna</span>
+            </div>
+        </div>
+
+        <div class="feature-badge badge-3">
+            <div class="fb-icon">🌐</div>
+            <div class="fb-content">
+                <span class="fb-title">EN • ES • FR</span>
+                <span class="fb-sub">Routing i18n Nativo</span>
+            </div>
+        </div>
+
+        <!-- Main Browser Mockup -->
+        <div class="browser-window">
+            <div class="browser-bar">
+                <div class="window-controls">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                </div>
+                <div class="address-bar">landing-template.vercel.app</div>
+                <div style="width: 46px;"></div> <!-- spacer -->
+            </div>
+            
+            <div class="landing-content">
+                <div class="brand-badge">⚡️ Astro Landing Template</div>
+                <div class="hero-title">Tu próxima Web Profesional,<br><span>Desplegada en minutos.</span></div>
+                <div class="hero-subtitle">
+                    Plantilla de alto rendimiento diseñada para máxima velocidad, accesibilidad perfecta y gestión de contenido vía administrador visual.
+                </div>
+                <div class="hero-buttons">
+                    <div class="btn btn-primary">Hacer Fork en GitHub</div>
+                    <div class="btn btn-secondary">Ver Repo Base</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
